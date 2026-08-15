@@ -16,6 +16,7 @@ describe('App', () => {
 		render(<App />);
 		expect(screen.getByText('DECIMAL TIME')).toBeInTheDocument();
 		expect(screen.getByText('STANDARD TIME')).toBeInTheDocument();
+		expect(screen.getByRole('status').querySelectorAll('.decimal-slot')).toHaveLength(7);
 		expect(screen.getByRole('button', { name: 'Open settings' })).toBeInTheDocument();
 	});
 
