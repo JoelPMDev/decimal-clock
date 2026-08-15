@@ -1,0 +1,3 @@
+import { beforeEach, describe, expect, it } from 'vitest';
+import { loadPreference, PREFERENCE_KEY, savePreference } from '../../src/platform/persistence';
+describe('preference persistence', () => { beforeEach(() => localStorage.clear()); it('round trips named records', () => { expect(savePreference({ mode: 'named', timeZone: 'Europe/London' })).toBe(true); expect(loadPreference()).toEqual({ mode: 'named', timeZone: 'Europe/London' }); }); it('falls back for malformed records', () => { localStorage.setItem(PREFERENCE_KEY, '{bad'); expect(loadPreference()).toEqual({ mode: 'automatic' }); }); });

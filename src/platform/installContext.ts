@@ -1,0 +1,5 @@
+export type InstallState = { isInstalled: boolean; canPrompt: boolean; isIOS: boolean; prompt: (() => Promise<void>) | null };
+type DeferredPrompt = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: string }> };
+export function detectInstalled(): boolean { return window.matchMedia?.('(display-mode: standalone)').matches === true || (navigator as Navigator & { standalone?: boolean }).standalone === true; }
+export function detectIOS(): boolean { return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+export function watchInstallContext(onChange: (state: InstallState) => void): () => void { let deferred: DeferredPrompt | null = null; const refresh = () => onChange({ isInstalled: detectInstalled(), canPrompt: Boolean(deferred), isIOS: detectIOS(), prompt: deferred ? async () => { await deferred?.prompt(); deferred = null; refresh(); } : null }); const capture = (event: Event) => { event.preventDefault(); deferred = event as DeferredPrompt; refresh(); }; window.addEventListener('beforeinstallprompt', capture); refresh(); return () => window.removeEventListener('beforeinstallprompt', capture); }

@@ -1,0 +1,1 @@
+export function InstallControl({ onInstall, onGuide }: { onInstall: () => void; onGuide: () => void }) { return <button className="install-control" type="button" onClick={onInstall} onContextMenu={(event) => { event.preventDefault(); onGuide(); }} aria-label="Install Metric Clock">Install</button>; }

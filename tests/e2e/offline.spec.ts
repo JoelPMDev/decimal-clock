@@ -1,0 +1,2 @@
+import { test, expect } from '@playwright/test';
+test('manifest and service worker shell are published', async ({ page }) => { await page.goto('/'); expect(await page.locator('link[rel="manifest"]').count()).toBe(1); expect(await page.evaluate(() => 'serviceWorker' in navigator)).toBe(true); });

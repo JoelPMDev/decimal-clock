@@ -1,0 +1,2 @@
+import type { DisplaySnapshot } from '../domain/types';
+export function ClockDisplay({ snapshot }: { snapshot: DisplaySnapshot }) { return <main className="clock" aria-label="Metric Clock"><p className="eyebrow">DECIMAL TIME</p><output className="decimal" aria-live="polite">{snapshot.decimalTimeLabel}</output><p className="eyebrow secondary-label">LOCAL TIME</p><time className="local" dateTime={snapshot.instant.toISOString()}>{snapshot.conventionalTimeLabel}</time><p className="zone">{snapshot.timeZoneLabel} · {snapshot.localDate}</p></main>; }

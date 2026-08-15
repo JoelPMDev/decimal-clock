@@ -1,0 +1,4 @@
+export type TimeZonePreference = { mode: 'automatic' } | { mode: 'named'; timeZone: string };
+export type LocalDayWindow = { timeZone: string; localDate: string; start: Date; end: Date; durationMilliseconds: number };
+export type DecimalPosition = { elapsedMilliseconds: number; proportion: number; totalDecimalTicks: number; displayHour: number; displayMinute: number; displaySecond: number };
+export type DisplaySnapshot = { instant: Date; timeZone: string; timeZoneLabel: string; localDate: string; conventionalTimeLabel: string; decimalTimeLabel: string; dayStart: Date; dayEnd: Date; decimal: DecimalPosition };

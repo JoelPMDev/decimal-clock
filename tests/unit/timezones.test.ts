@@ -1,0 +1,3 @@
+import { describe, expect, it } from 'vitest';
+import { filterTimeZones, friendlyName } from '../../src/platform/timezones';
+describe('timezone catalog', () => { it('finds recognizable cities', () => { expect(friendlyName('Europe/London')).toBe('London'); expect(filterTimeZones('tokyo')).toContain('Asia/Tokyo'); }); it('supports empty results', () => expect(filterTimeZones('not-a-zone')).toEqual([])); });

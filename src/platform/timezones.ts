@@ -1,0 +1,4 @@
+const fallback = ['UTC', 'Europe/London', 'America/New_York', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris', 'Asia/Kolkata', 'America/Los_Angeles'];
+export function supportedTimeZones(): string[] { return typeof Intl.supportedValuesOf === 'function' ? ['UTC', ...Intl.supportedValuesOf('timeZone').filter((zone) => zone !== 'UTC')] : fallback; }
+export function friendlyName(zone: string): string { const names: Record<string, string> = { UTC: 'UTC', 'Europe/London': 'London', 'America/New_York': 'New York', 'Asia/Tokyo': 'Tokyo' }; return names[zone] ?? zone.replaceAll('_', ' ').replaceAll('/', ' / '); }
+export function filterTimeZones(query: string, zones = supportedTimeZones()): string[] { const needle = query.trim().toLowerCase(); return zones.filter((zone) => !needle || `${zone} ${friendlyName(zone)}`.toLowerCase().includes(needle)); }

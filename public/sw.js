@@ -1,0 +1,4 @@
+const CACHE = 'metric-clock-shell-v2';
+self.addEventListener('install', (event) => event.waitUntil(fetch('/offline-assets.json').then((response) => response.json()).catch(() => ['/','/index.html','/manifest.webmanifest']).then((assets) => caches.open(CACHE).then((cache) => cache.addAll(assets)))));
+self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))));
+self.addEventListener('fetch', (event) => event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request).then((response) => { const copy = response.clone(); void caches.open(CACHE).then((cache) => cache.put(event.request, copy)); return response; }).catch(() => caches.match('/index.html')))));

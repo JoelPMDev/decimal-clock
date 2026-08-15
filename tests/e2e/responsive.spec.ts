@@ -1,0 +1,2 @@
+import { test, expect } from '@playwright/test';
+test('clock shell is visible without overlap-critical missing content', async ({ page }) => { await page.goto('/'); await expect(page.getByText('DECIMAL TIME')).toBeVisible(); await expect(page.getByRole('button', { name: 'Open settings' })).toBeVisible(); });
