@@ -2,4 +2,72 @@ import { useEffect, useRef } from 'react';
 import type { TimeZonePreference } from '../domain/types';
 import { friendlyName } from '../platform/timezones';
 import { TimezoneSelector } from './TimezoneSelector';
-export function SettingsDrawer({ open, preference, query, onQuery, onAutomatic, onAlwaysOnChange, onStandardTimeChange, onSeparatorChange, onClose }: { open: boolean; preference: TimeZonePreference; query: string; onQuery: (v: string) => void; onAutomatic: () => void; onAlwaysOnChange: (enabled: boolean) => void; onStandardTimeChange: (enabled: boolean) => void; onSeparatorChange: (separator: TimeZonePreference['separator']) => void; onClose: () => void }) { const closeRef = useRef<HTMLButtonElement>(null); useEffect(() => { if (open) closeRef.current?.focus(); }, [open]); useEffect(() => { const handler = (event: KeyboardEvent) => { if (open && event.key === 'Escape') onClose(); }; document.addEventListener('keydown', handler); return () => document.removeEventListener('keydown', handler); }, [open, onClose]); if (!open) return null; return <aside className="drawer" aria-label="Clock settings"><div className="drawer-head"><h2>Settings</h2><button ref={closeRef} type="button" aria-label="Close settings" onClick={onClose}>×</button></div><section className="settings-section" aria-labelledby="timezone-settings-title"><h3 id="timezone-settings-title">Timezone</h3><button type="button" className={preference.mode === 'automatic' ? 'selected mode' : 'mode'} aria-pressed={preference.mode === 'automatic'} onClick={onAutomatic}>Automatic device timezone</button><TimezoneSelector query={query} onQuery={onQuery}/>{preference.mode === 'named' && <p className="current">Selected: {friendlyName(preference.timeZone)}</p>}</section><section className="settings-section" aria-labelledby="decimal-view-settings-title"><h3 id="decimal-view-settings-title">Decimal Time View</h3><div className="separator-setting" role="radiogroup" aria-label="Decimal separator"><label className="separator-option"><input type="radio" name="decimal-separator" value=":" checked={preference.separator === ':'} onChange={() => onSeparatorChange(':')}/><span>:</span></label><label className="separator-option"><input type="radio" name="decimal-separator" value="." checked={preference.separator === '.'} onChange={() => onSeparatorChange('.')}/><span>.</span></label><label className="separator-option"><input type="radio" name="decimal-separator" value="-" checked={preference.separator === '-'} onChange={() => onSeparatorChange('-')}/><span>-</span></label><label className="separator-option"><input type="radio" name="decimal-separator" value="/" checked={preference.separator === '/'} onChange={() => onSeparatorChange('/')}/><span>/</span></label></div></section><section className="settings-section" aria-labelledby="preferences-settings-title"><h3 id="preferences-settings-title">Preferences</h3><label className="always-on-setting"><span>Show Standard Time</span><input type="checkbox" role="switch" checked={preference.showStandardTime} onChange={(event) => onStandardTimeChange(event.target.checked)}/></label><label className="always-on-setting"><span>Always On Mode</span><input type="checkbox" role="switch" checked={preference.alwaysOn} onChange={(event) => onAlwaysOnChange(event.target.checked)}/></label></section></aside>; }
+
+type SettingsDrawerProps = {
+	open: boolean;
+	preference: TimeZonePreference;
+	query: string;
+	onQuery: (value: string) => void;
+	onAutomatic: () => void;
+	onAlwaysOnChange: (enabled: boolean) => void;
+	onStandardTimeChange: (enabled: boolean) => void;
+	onSeparatorChange: (separator: TimeZonePreference['separator']) => void;
+	onClose: () => void;
+};
+
+export function SettingsDrawer({
+	open,
+	preference,
+	query,
+	onQuery,
+	onAutomatic,
+	onAlwaysOnChange,
+	onStandardTimeChange,
+	onSeparatorChange,
+	onClose,
+}: SettingsDrawerProps) {
+	const closeRef = useRef<HTMLButtonElement>(null);
+
+	useEffect(() => {
+		if (open) closeRef.current?.focus();
+	}, [open]);
+
+	useEffect(() => {
+		const handler = (event: KeyboardEvent) => {
+			if (open && event.key === 'Escape') onClose();
+		};
+		document.addEventListener('keydown', handler);
+		return () => document.removeEventListener('keydown', handler);
+	}, [open, onClose]);
+
+	if (!open) return null;
+
+	return (
+		<aside className="drawer" aria-label="Clock settings">
+			<div className="drawer-head">
+				<h2>Settings</h2>
+				<button ref={closeRef} type="button" aria-label="Close settings" onClick={onClose}>×</button>
+			</div>
+			<section className="settings-section" aria-labelledby="timezone-settings-title">
+				<h3 id="timezone-settings-title">Timezone</h3>
+				<button type="button" className={preference.mode === 'automatic' ? 'selected mode' : 'mode'} aria-pressed={preference.mode === 'automatic'} onClick={onAutomatic}>Automatic device timezone</button>
+				<TimezoneSelector query={query} onQuery={onQuery} />
+				{preference.mode === 'named' && <p className="current">Selected: {friendlyName(preference.timeZone)}</p>}
+			</section>
+			<section className="settings-section" aria-labelledby="decimal-view-settings-title">
+				<h3 id="decimal-view-settings-title">Decimal Time View</h3>
+				<div className="separator-setting" role="radiogroup" aria-label="Decimal separator">
+					<label className="separator-option"><input aria-label="Colon (:)" type="radio" name="decimal-separator" value=":" checked={preference.separator === ':'} onChange={() => onSeparatorChange(':')} /><span>:</span></label>
+					<label className="separator-option"><input aria-label="Decimal point (.)" type="radio" name="decimal-separator" value="." checked={preference.separator === '.'} onChange={() => onSeparatorChange('.')} /><span>.</span></label>
+					<label className="separator-option"><input aria-label="Hyphen (-)" type="radio" name="decimal-separator" value="-" checked={preference.separator === '-'} onChange={() => onSeparatorChange('-')} /><span>-</span></label>
+					<label className="separator-option"><input aria-label="Slash (/)" type="radio" name="decimal-separator" value="/" checked={preference.separator === '/'} onChange={() => onSeparatorChange('/')} /><span>/</span></label>
+				</div>
+			</section>
+			<section className="settings-section" aria-labelledby="preferences-settings-title">
+				<h3 id="preferences-settings-title">Preferences</h3>
+				<label className="always-on-setting"><span>Show Standard Time</span><input type="checkbox" role="switch" checked={preference.showStandardTime} onChange={(event) => onStandardTimeChange(event.target.checked)} /></label>
+				<label className="always-on-setting"><span>Always On Mode</span><input type="checkbox" role="switch" checked={preference.alwaysOn} onChange={(event) => onAlwaysOnChange(event.target.checked)} /></label>
+			</section>
+		</aside>
+	);
+}

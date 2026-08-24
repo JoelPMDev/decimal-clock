@@ -20,7 +20,7 @@
 
 ## Timezone Preference
 
-- **Fields**: `mode: 'automatic' | 'named'`; `timeZone?: IANA identifier`; `alwaysOn: boolean`; `showStandardTime: boolean`; `separator: ':' | '.' | '#' | '/'`; `persistenceVersion: 1`.
+- **Fields**: `mode: 'automatic' | 'named'`; `timeZone?: IANA identifier`; `alwaysOn: boolean`; `showStandardTime: boolean`; `separator: ':' | '.' | '-' | '/'`; `persistenceVersion: 1`.
 - **Validation**: automatic mode has no required named zone; named mode requires a valid supported IANA identifier. Missing `showStandardTime` values default to visible and missing or invalid `separator` values default to `:` for backwards compatibility. Invalid records fall back to automatic mode.
 - **Transitions**: initial state is automatic device timezone with standard time visible and colon separators; selecting a named zone or changing display settings updates immediately and persists best effort; selecting automatic clears the named choice and persists; storage failure leaves the current session state usable.
 

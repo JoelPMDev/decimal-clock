@@ -1,4 +1,4 @@
-export type DecimalSeparator = ':' | '.' | '#' | '/';
+export type DecimalSeparator = ':' | '.' | '-' | '/';
 export type TimeZonePreference = ({ mode: 'automatic' } | { mode: 'named'; timeZone: string }) & { alwaysOn: boolean; showStandardTime: boolean; separator: DecimalSeparator };
 export type LocalDayWindow = { timeZone: string; localDate: string; start: Date; end: Date; durationMilliseconds: number };
 export type DecimalPosition = { elapsedMilliseconds: number; proportion: number; totalDecimalTicks: number; displayHour: number; displayMinute: number; displaySecond: number };
