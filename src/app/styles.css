@@ -31,3 +31,7 @@
 	.logo { height: 112px; padding-top: 1rem; }
 	.clock { min-height: calc(100vh - 112px); }
 }
+.clock { min-height: calc(100dvh - 128px); padding: 1rem; }
+@media (max-width: 560px) {
+	.clock { min-height: calc(100dvh - 112px); padding: 1rem; }
+}
