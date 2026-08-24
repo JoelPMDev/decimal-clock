@@ -32,7 +32,7 @@ export default function App() {
 		windowCache.current = activeCache;
 	}
 
-	const snapshot = buildDisplaySnapshot(instant, zone, activeCache.window);
+	const snapshot = buildDisplaySnapshot(instant, zone, activeCache.window, preference.separator);
 
 	useEffect(() => {
 		const scheduler = createClockScheduler(browserTimeSource, setInstant);
@@ -87,7 +87,7 @@ export default function App() {
 	}, [preference.alwaysOn, controlsVisible]);
 
 	const automatic = () => {
-		const next: TimeZonePreference = { mode: 'automatic', alwaysOn: preference.alwaysOn, showStandardTime: preference.showStandardTime };
+		const next: TimeZonePreference = { mode: 'automatic', alwaysOn: preference.alwaysOn, showStandardTime: preference.showStandardTime, separator: preference.separator };
 		setPreference(next);
 		savePreference(next);
 	};
@@ -106,6 +106,12 @@ export default function App() {
 		savePreference(next);
 	};
 
+	const setSeparator = (separator: TimeZonePreference['separator']) => {
+		const next: TimeZonePreference = { ...preference, separator };
+		setPreference(next);
+		savePreference(next);
+	};
+
 	const presentation = preference.alwaysOn && !controlsVisible;
 
 	return <>
@@ -119,7 +125,7 @@ export default function App() {
 		{presentation && alwaysOnGuideVisible && <p className="always-on-guide" role="status"><strong>Always On Mode Enabled</strong><span>Double tap anywhere to show controls</span></p>}
 		{!presentation && <>
 			{!install.isInstalled && <InstallControl onInstall={() => { if (install.prompt) void install.prompt(); else setGuideOpen(true); }} onGuide={() => setGuideOpen(true)}/>}
-			<SettingsDrawer open={settingsOpen} preference={preference} query={query} onQuery={setQuery} onAutomatic={() => { automatic(); setSettingsOpen(false); }} onAlwaysOnChange={setAlwaysOn} onStandardTimeChange={setStandardTime} onClose={() => setSettingsOpen(false)}/>
+			<SettingsDrawer open={settingsOpen} preference={preference} query={query} onQuery={setQuery} onAutomatic={() => { automatic(); setSettingsOpen(false); }} onAlwaysOnChange={setAlwaysOn} onStandardTimeChange={setStandardTime} onSeparatorChange={setSeparator} onClose={() => setSettingsOpen(false)}/>
 			<InstallGuidanceDialog open={guideOpen} onClose={() => setGuideOpen(false)}/>
 		</>}
 	</>;

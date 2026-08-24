@@ -27,6 +27,13 @@
 .logo .settings-button { position: absolute; top: 50% !important; right: 1.5rem !important; bottom: auto !important; display: grid; width: 3rem; height: 3rem; place-items: center; padding: 0 !important; border: 0 !important; background: transparent !important; line-height: 1; transform: translateY(-50%); }
 .standard-time-hidden, .standard-time-hidden > * { visibility: hidden; }
 .standard-time { display: grid; justify-items: center; text-align: center; }
+.settings-section { padding: 1.25rem 0; border-top: 1px solid #536664; }
+.settings-section:first-of-type { border-top: 0; padding-top: 1rem; }
+.settings-section h3 { margin: 0 0 .8rem; color: #d9b76c; font-family: Syne, sans-serif; font-size: 1rem; }
+.separator-setting { display: grid; gap: .55rem; }
+.separator-option { display: flex; align-items: center; gap: .65rem; padding: .55rem .7rem; border: 1px solid #536664; color: #d5ded9; cursor: pointer; }
+.separator-option:has(input:checked) { border-color: #82c8bc; background: #29423f; color: #f1f0e9; }
+.separator-option input { accent-color: #82c8bc; }
 .logo { height: 128px; padding-top: 1rem; }
 .clock { min-height: calc(100vh - 128px); }
 @media (max-width: 560px) {

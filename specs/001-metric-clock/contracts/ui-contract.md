@@ -21,6 +21,7 @@ The settings button opens a right-side semantic `aside` or dialog drawer. V1 con
 - Search input with an accessible label.
 - Searchable named timezone options, including recognizable London, New York, and Tokyo labels.
 - Show Standard Time toggle, enabled by default.
+- Decimal separator selector with colon, decimal point, hash, and slash options.
 - Always On Mode toggle.
 - Selected state, empty-result state, close button, and keyboard Escape handling.
 
