@@ -103,14 +103,16 @@ export default function App() {
 	const presentation = preference.alwaysOn && !controlsVisible;
 
 	return <>
-		{!presentation && <header className="logo">Metric Clock</header>}
+		{!presentation && <header className="logo">
+			<img src="/decima_logo_horizontal.svg" alt="Decima" />
+			<button className="conversion-help-button" type="button" aria-label="Show decimal time conversion" aria-describedby={conversionHelpOpen ? 'conversion-help' : undefined} aria-expanded={conversionHelpOpen} onClick={() => setConversionHelpOpen((open) => !open)} onFocus={() => setConversionHelpOpen(true)} onBlur={() => setConversionHelpOpen(false)} onMouseEnter={() => setConversionHelpOpen(true)} onMouseLeave={() => setConversionHelpOpen(false)}>?</button>
+			{conversionHelpOpen && <div id="conversion-help" className="conversion-help" role="tooltip"><p>1 decimal hour = 2 hours 24 minutes</p><p>1 decimal minute = 1 minute 26 seconds</p></div>}
+			<button className="settings-button" type="button" aria-label="Open settings" aria-pressed={settingsOpen} onClick={() => setSettingsOpen(true)}>⚙</button>
+		</header>}
 		<ClockDisplay snapshot={snapshot} presentation={presentation} onRevealControls={() => setControlsVisible(true)}/>
 		{presentation && alwaysOnGuideVisible && <p className="always-on-guide" role="status"><strong>Always On Mode Enabled</strong><span>Double tap anywhere to show controls</span></p>}
 		{!presentation && <>
 			{!install.isInstalled && <InstallControl onInstall={() => { if (install.prompt) void install.prompt(); else setGuideOpen(true); }} onGuide={() => setGuideOpen(true)}/>}
-			<button className="conversion-help-button" type="button" aria-label="Show decimal time conversion" aria-describedby={conversionHelpOpen ? 'conversion-help' : undefined} aria-expanded={conversionHelpOpen} onClick={() => setConversionHelpOpen((open) => !open)} onFocus={() => setConversionHelpOpen(true)} onBlur={() => setConversionHelpOpen(false)} onMouseEnter={() => setConversionHelpOpen(true)} onMouseLeave={() => setConversionHelpOpen(false)}>?</button>
-			{conversionHelpOpen && <div id="conversion-help" className="conversion-help" role="tooltip"><p>1 decimal hour = 2 hours 24 minutes</p><p>1 decimal minute = 1 minute 26 seconds</p></div>}
-			<button className="settings-button" type="button" aria-label="Open settings" aria-pressed={settingsOpen} onClick={() => setSettingsOpen(true)}>⚙</button>
 			<SettingsDrawer open={settingsOpen} preference={preference} query={query} onQuery={setQuery} onAutomatic={() => { automatic(); setSettingsOpen(false); }} onAlwaysOnChange={setAlwaysOn} onClose={() => setSettingsOpen(false)}/>
 			<InstallGuidanceDialog open={guideOpen} onClose={() => setGuideOpen(false)}/>
 		</>}

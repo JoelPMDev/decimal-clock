@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">Decima logo mark</title>
+<desc id="desc">A transparent ten-segment decimal day ring with two illuminated segments and a central dot.</desc>
+<defs>
+  <linearGradient id="activeA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9CBD1"/></linearGradient>
+  <linearGradient id="activeB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2F2F4"/><stop offset="1" stop-color="#AEB1B8"/></linearGradient>
+  <linearGradient id="inactive" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#575960"/><stop offset="1" stop-color="#27282D"/></linearGradient>
+  <radialGradient id="dot"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D8D9DD"/></radialGradient>
+</defs>
+<path d="M 259.935,51.038 A 205,205 0 0 1 373.290,87.869 L 341.250,133.797 A 149,149 0 0 0 258.860,107.027 Z" fill="url(#activeA)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 379.658,92.495 A 205,205 0 0 1 449.715,188.920 L 396.797,207.245 A 149,149 0 0 0 345.878,137.160 Z" fill="url(#activeB)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 452.147,196.406 A 205,205 0 0 1 452.147,315.594 L 398.565,299.315 A 149,149 0 0 0 398.565,212.685 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 449.715,323.080 A 205,205 0 0 1 379.658,419.505 L 345.878,374.840 A 149,149 0 0 0 396.797,304.755 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 373.290,424.131 A 205,205 0 0 1 259.935,460.962 L 258.860,404.973 A 149,149 0 0 0 341.250,378.203 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 252.065,460.962 A 205,205 0 0 1 138.710,424.131 L 170.750,378.203 A 149,149 0 0 0 253.140,404.973 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 132.342,419.505 A 205,205 0 0 1 62.285,323.080 L 115.203,304.755 A 149,149 0 0 0 166.122,374.840 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 59.853,315.594 A 205,205 0 0 1 59.853,196.406 L 113.435,212.685 A 149,149 0 0 0 113.435,299.315 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 62.285,188.920 A 205,205 0 0 1 132.342,92.495 L 166.122,137.160 A 149,149 0 0 0 115.203,207.245 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<path d="M 138.710,87.869 A 205,205 0 0 1 252.065,51.038 L 253.140,107.027 A 149,149 0 0 0 170.750,133.797 Z" fill="url(#inactive)" stroke="#111216" stroke-width="1.6"/>
+<circle cx="256" cy="256" r="16" fill="url(#dot)"/>
+</svg>
