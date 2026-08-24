@@ -25,6 +25,8 @@
 .logo { position: relative; border-bottom: 0; }
 .logo .conversion-help-button { top: 50%; transform: translateY(-50%); }
 .logo .settings-button { position: absolute; top: 50% !important; right: 1.5rem !important; bottom: auto !important; display: grid; width: 3rem; height: 3rem; place-items: center; padding: 0 !important; border: 0 !important; background: transparent !important; line-height: 1; transform: translateY(-50%); }
+.standard-time-hidden, .standard-time-hidden > * { visibility: hidden; }
+.standard-time { display: grid; justify-items: center; text-align: center; }
 .logo { height: 128px; padding-top: 1rem; }
 .clock { min-height: calc(100vh - 128px); }
 @media (max-width: 560px) {

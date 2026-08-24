@@ -20,6 +20,8 @@ The settings button opens a right-side semantic `aside` or dialog drawer. V1 con
 - Automatic device timezone option.
 - Search input with an accessible label.
 - Searchable named timezone options, including recognizable London, New York, and Tokyo labels.
+- Show Standard Time toggle, enabled by default.
+- Always On Mode toggle.
 - Selected state, empty-result state, close button, and keyboard Escape handling.
 
 Opening records the invoking control; closing returns focus to it. Selection updates both clock labels and values immediately.

@@ -37,6 +37,15 @@ describe('App', () => {
 		expect(screen.getByRole('tooltip')).toHaveTextContent('1 decimal minute = 1 minute 26 seconds');
 	});
 
+	it('shows and hides standard time from settings', () => {
+		render(<App />);
+		expect(screen.getByText('STANDARD TIME')).toBeInTheDocument();
+		fireEvent.click(screen.getByRole('button', { name: 'Open settings' }));
+		fireEvent.click(screen.getByRole('switch', { name: 'Show Standard Time' }));
+		expect(screen.getByText('STANDARD TIME').parentElement).toHaveClass('standard-time-hidden');
+		expect(screen.getByRole('main').querySelector('time')?.parentElement).toHaveClass('standard-time-hidden');
+	});
+
 	it('enters Always On presentation, requests a wake lock, and reveals controls on double tap', async () => {
 		let releaseHandler: (() => void) | undefined;
 		const sentinel = { released: false, release: vi.fn().mockResolvedValue(undefined), addEventListener: vi.fn((_type: 'release', handler: () => void) => { releaseHandler = handler; }) };

@@ -87,17 +87,23 @@ export default function App() {
 	}, [preference.alwaysOn, controlsVisible]);
 
 	const automatic = () => {
-		const next: TimeZonePreference = { mode: 'automatic', alwaysOn: preference.alwaysOn };
+		const next: TimeZonePreference = { mode: 'automatic', alwaysOn: preference.alwaysOn, showStandardTime: preference.showStandardTime };
 		setPreference(next);
 		savePreference(next);
 	};
 
 	const setAlwaysOn = (alwaysOn: boolean) => {
-		const next: TimeZonePreference = preference.mode === 'named' ? { ...preference, alwaysOn } : { mode: 'automatic', alwaysOn };
+		const next: TimeZonePreference = { ...preference, alwaysOn };
 		setPreference(next);
 		savePreference(next);
 		setControlsVisible(!alwaysOn);
 		setSettingsOpen(false);
+	};
+
+	const setStandardTime = (showStandardTime: boolean) => {
+		const next: TimeZonePreference = { ...preference, showStandardTime };
+		setPreference(next);
+		savePreference(next);
 	};
 
 	const presentation = preference.alwaysOn && !controlsVisible;
@@ -109,11 +115,11 @@ export default function App() {
 			{conversionHelpOpen && <div id="conversion-help" className="conversion-help" role="tooltip"><p>1 decimal hour = 2 hours 24 minutes</p><p>1 decimal minute = 1 minute 26 seconds</p></div>}
 			<button className="settings-button" type="button" aria-label="Open settings" aria-pressed={settingsOpen} onClick={() => setSettingsOpen(true)}>⚙</button>
 		</header>}
-		<ClockDisplay snapshot={snapshot} presentation={presentation} onRevealControls={() => setControlsVisible(true)}/>
+		<ClockDisplay snapshot={snapshot} presentation={presentation} showStandardTime={preference.showStandardTime} onRevealControls={() => setControlsVisible(true)}/>
 		{presentation && alwaysOnGuideVisible && <p className="always-on-guide" role="status"><strong>Always On Mode Enabled</strong><span>Double tap anywhere to show controls</span></p>}
 		{!presentation && <>
 			{!install.isInstalled && <InstallControl onInstall={() => { if (install.prompt) void install.prompt(); else setGuideOpen(true); }} onGuide={() => setGuideOpen(true)}/>}
-			<SettingsDrawer open={settingsOpen} preference={preference} query={query} onQuery={setQuery} onAutomatic={() => { automatic(); setSettingsOpen(false); }} onAlwaysOnChange={setAlwaysOn} onClose={() => setSettingsOpen(false)}/>
+			<SettingsDrawer open={settingsOpen} preference={preference} query={query} onQuery={setQuery} onAutomatic={() => { automatic(); setSettingsOpen(false); }} onAlwaysOnChange={setAlwaysOn} onStandardTimeChange={setStandardTime} onClose={() => setSettingsOpen(false)}/>
 			<InstallGuidanceDialog open={guideOpen} onClose={() => setGuideOpen(false)}/>
 		</>}
 	</>;

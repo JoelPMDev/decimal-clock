@@ -20,9 +20,9 @@
 
 ## Timezone Preference
 
-- **Fields**: `mode: 'automatic' | 'named'`; `timeZone?: IANA identifier`; `persistenceVersion: 1`.
-- **Validation**: automatic mode has no required named zone; named mode requires a valid supported IANA identifier. Invalid records fall back to automatic mode.
-- **Transitions**: initial state is automatic device timezone; selecting a named zone updates immediately and persists best effort; selecting automatic clears the named choice and persists; storage failure leaves the current session state usable.
+- **Fields**: `mode: 'automatic' | 'named'`; `timeZone?: IANA identifier`; `alwaysOn: boolean`; `showStandardTime: boolean`; `persistenceVersion: 1`.
+- **Validation**: automatic mode has no required named zone; named mode requires a valid supported IANA identifier. Missing `showStandardTime` values default to visible for backwards compatibility. Invalid records fall back to automatic mode.
+- **Transitions**: initial state is automatic device timezone with standard time visible; selecting a named zone or changing display settings updates immediately and persists best effort; selecting automatic clears the named choice and persists; storage failure leaves the current session state usable.
 
 ## Display Snapshot
 
@@ -39,7 +39,7 @@
 ## Settings Drawer State
 
 - **Fields**: `open`, `selectedPreference`, `searchQuery`, `filteredTimeZones`, `activeDescendant`, `returnFocusTarget`.
-- **Validation**: search results are derived from the supported catalog and friendly names; empty results preserve the current selection and show a no-results status. Drawer exposes only automatic mode and named search in V1.
+- **Validation**: search results are derived from the supported catalog and friendly names; empty results preserve the current selection and show a no-results status. Drawer exposes timezone mode, named search, standard-time visibility, and Always On mode.
 - **Transitions**: settings trigger opens drawer and records focus target; Escape, close button, or selection completion closes it as designed; open state traps focus within the drawer while active and returns focus on close. Selecting a zone updates preference, snapshot, labels, and persistence; search changes only the filtered list.
 
 ## Relationships

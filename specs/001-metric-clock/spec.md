@@ -98,7 +98,7 @@ A person uses Metric Clock on a phone, tablet, or desktop with a distraction-fre
 - **FR-007**: The application MUST allow users to choose a named timezone through a searchable selector and MUST apply that choice to decimal time, conventional time, and all related labels.
 - **FR-008**: The application MUST allow users to return to automatic device-timezone mode.
 - **FR-009**: The application MUST save the user's timezone mode and named timezone choice locally and restore it when the application is reopened.
-- **FR-010**: Version 1 settings MUST contain only automatic timezone mode and the searchable timezone selector.
+- **FR-010**: Version 1 settings MUST contain automatic timezone mode, the searchable timezone selector, standard-time visibility, and Always On mode.
 - **FR-011**: The application MUST update both clocks smoothly and promptly from a current time source, without visible drift, lag, jitter, or dependence on accumulated update intervals.
 - **FR-012**: The application MUST reserve space at the top of the screen for a future logo without allowing that reserved space to obscure or displace the clock content unexpectedly.
 - **FR-013**: The application MUST center a dominant, high-contrast, stable decimal clock and place the smaller conventional clock immediately beneath it.
